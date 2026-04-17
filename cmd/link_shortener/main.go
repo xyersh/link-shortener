@@ -35,6 +35,7 @@ func main() {
 
 	router.Use(middleware.RequestID) // Добавляет request_id в каждый запрос, для трейсинга
 	router.Use(middleware.Logger)    // Логирование всех запросов
+	router.Use(mwLogger.New(log))
 	router.Use(middleware.Recoverer) // Если где-то внутри сервера (обработчика запроса) произойдет паника, приложение не должно упасть
 	router.Use(middleware.URLFormat) // Парсер URLов поступающих запросов
 }
