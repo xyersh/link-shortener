@@ -7,6 +7,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/xyersh/link-shortener/internal/config"
+	mwLogger "github.com/xyersh/link-shortener/internal/http-server/middleware/logger"
 	"github.com/xyersh/link-shortener/internal/lib/logger/sl"
 	"github.com/xyersh/link-shortener/internal/storage/sqlite"
 )
@@ -38,6 +39,7 @@ func main() {
 	router.Use(mwLogger.New(log))
 	router.Use(middleware.Recoverer) // Если где-то внутри сервера (обработчика запроса) произойдет паника, приложение не должно упасть
 	router.Use(middleware.URLFormat) // Парсер URLов поступающих запросов
+
 }
 
 func setupLogger(env string) *slog.Logger {
